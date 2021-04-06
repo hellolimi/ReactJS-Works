@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.subWrapper{ display:flex; justify-content:center; align-items:center; }
+.contents{ display:flex; align-items:center; }
+.textBox{ margin-left:30px; }
+.textBox h2{ margin-bottom:20px; font-size:48px; font-weight:400; }
+.textBox p{ font-size:20px; line-height:36px; }
+
+
