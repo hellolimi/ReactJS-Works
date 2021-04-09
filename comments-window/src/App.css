@@ -1,0 +1,36 @@
+body, html{ display:flex; justify-content:center; align-items:center; width:100%; height:100vh; overflow:hidden;}
+*{padding:0; margin:0; font-size:18px; transition:0.3s;}
+
+.wrapper{ display:flex; flex-direction:column; width:520px; max-width:100vw; max-height:100vh; padding:1rem; box-sizing:border-box; border-radius:8px; border:4px solid #ccc;}
+img{ width:100%; }
+button{ cursor: pointer; border:none; background:transparent; }
+
+.form{ display:flex; margin:1rem 0;}
+input{ width:100%; padding:5px; box-sizing:border-box; border:none; border-bottom:1px solid #ccc; }
+input [placeholder]{font-size:0.875rem;}
+.form span{ display:block; }
+#nickname{ flex:3; }
+#words{ flex:5; margin:0 16px !important; }
+.create{ flex:2; border-radius:8px; background-color:rgb(255, 111, 111); color:#fff; font-weight:600; font-size:0.875rem; }
+input[placeholder]{ font-size:0.875rem; }
+.comments{ overflow-y:scroll; }
+
+.comment{ display:flex; height:30px; line-height:30px; margin:10px 0; }
+.nickname{ margin-right:0.5rem; color:#333; font-weight:600; font-size:1.125rem; }
+.like{ display:flex; justify-content:center; align-items:center; width:30px; height:30px; margin-left:1rem; }
+.like svg{ width:100%; height:100%; }
+
+@media screen and (max-width:1023px){
+    *{font-size:16px;}
+}
+
+@media screen and (max-width:767px){
+    *{font-size:14px;}
+    input[placeholder]{ height:40px; font-size:3vw; }
+    .comment{ line-height:24px; }
+    .like{ width:24px; height:24px; }
+}
+
+@media screen and (max-width:320px){
+    *{font-size:12px;}
+}
