@@ -20,4 +20,4 @@ function List({comments, onToggle}) {
     );
 }
 
-export default List;
+export default React.memo(List);

@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import './App.css';
 import List from './components/List';
 import Create from './components/Create';
+import Likes from './components/Likes';
 import img from  './paris.jpg';
 
 function App() {
@@ -62,13 +63,20 @@ function App() {
     setComments(comments.map(comment => comment.id === id?{...comment, like:!comment.like}:comment ));
   }
 
+  const counterComments = useCallback( comments => {
+    return comments.length;
+  }, []);
+
+  const countComments = counterComments(comments);
+
   return (
     <div className="wrapper">
       <img src={img} alt="me in paris" />
+      <Likes comments={countComments} />
       <Create nickname={nickname} words={words} onChange={onChange} onCreate={onCreate}/>
       <List comments={comments} onToggle={onToggle} />
     </div>
   );
 }
 
-export default App;
+export default React.memo(App);

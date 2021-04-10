@@ -21,4 +21,4 @@ function Create({ nickname, words, onChange, onCreate }) {
     );
 }
 
-export default Create;
+export default React.memo(Create);
