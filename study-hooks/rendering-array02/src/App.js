@@ -1,7 +1,9 @@
 import React, { useRef, useMemo, useCallback, useReducer } from 'react';
 import './App.css';
-import List from './List';
-import Create from './Create';
+import List from './components/List';
+import Create from './components/Create';
+import userInputs from './hooks/useInputs';
+import useInputs from './hooks/useInputs';
 
 function countActivatedMembers(members){
   console.log('활성 멤버 수를 세는 중');
@@ -37,14 +39,6 @@ const initialState = {
 
 function reducer(state, action){
   switch(action.type){
-    case 'CHANGE_INPUT':
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.name] : action.value
-        }
-      };
     case 'CREATE_MEMBER' :
         return {
           inputs: initialState.inputs,
@@ -67,10 +61,14 @@ function reducer(state, action){
 }
 
 function App() {
+  const[{name, email}, onChange, reset] = useInputs({
+    name: '',
+    email: ''
+  });
 
   const [state, dispatch] = useReducer(reducer, initialState);
+  const nextId = useRef(4);
   const {members} = state;
-  const {name, email} = state.inputs;
   
   const onChange = useCallback(
     (e) => {
@@ -81,8 +79,7 @@ function App() {
         value
       });
     }, []
-  );
-  const nextId = useRef(4);
+  ); 
   const onCreate = useCallback(
     () => {
       dispatch({
@@ -93,6 +90,7 @@ function App() {
           email
         }
       });
+      reset();
       nextId.current++;
     },
     [name, email]
