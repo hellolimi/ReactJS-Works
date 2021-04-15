@@ -2,7 +2,6 @@ import React, { useRef, useMemo, useCallback, useReducer } from 'react';
 import './App.css';
 import List from './components/List';
 import Create from './components/Create';
-import userInputs from './hooks/useInputs';
 import useInputs from './hooks/useInputs';
 
 function countActivatedMembers(members){
@@ -70,16 +69,6 @@ function App() {
   const nextId = useRef(4);
   const {members} = state;
   
-  const onChange = useCallback(
-    (e) => {
-      const{ name, value } = e.target;
-      dispatch({
-        type: 'CHANGE_INPUT',
-        name,
-        value
-      });
-    }, []
-  ); 
   const onCreate = useCallback(
     () => {
       dispatch({
@@ -93,7 +82,7 @@ function App() {
       reset();
       nextId.current++;
     },
-    [name, email]
+    [name, email, reset]
   );
   
   const onToggle =  useCallback(
