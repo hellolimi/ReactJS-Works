@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MemberDispatch } from '../App';
 
-function Member({member, onRemove, onToggle}){
+function Member({member}){
+    const dispatch = useContext(MemberDispatch);
 
     return(
         <div className="member" style={{cursor:'pointer', color:member.active&&'green'}}>
             <span>Member Name : {member.name}</span>
             <span>Member Email : {member.email}</span>
-            <button onClick={() => onRemove(member.id)}>Remove</button>
-            <button onClick={() => onToggle(member.id)}>Update</button>
+            <button onClick={() => (dispatch({type:'REMOVE_MEMBER', id: member.id}))}>Remove</button>
+            <button onClick={() => (dispatch({type:'TOGGLE_MEMBER', id:member.id}))}>Update</button>
         </div>
     );
 }
 
-function List({members, onRemove, onToggle}) {
+function List({members}) {
 
     return (
         <>
-            {members.map(member => <Member member={member} key={member.id} onRemove={onRemove} onToggle={onToggle} />)}
+            {members.map(member => <Member member={member} key={member.id} />)}
         </>
     );
 }

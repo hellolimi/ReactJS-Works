@@ -36,6 +36,8 @@ const initialState = {
   ]
 }
 
+export const MemberDispatch = React.createContext(null);
+
 function reducer(state, action){
   switch(action.type){
     case 'CREATE_MEMBER' :
@@ -84,22 +86,6 @@ function App() {
     },
     [name, email, reset]
   );
-  
-  const onToggle =  useCallback(
-    id => {
-      dispatch({
-        type: 'TOGGLE_MEMBER',
-        id
-      });
-    }, []);
-
-  const onRemove = useCallback(
-    id => {
-      dispatch({
-        type: 'REMOVE_MEMBER',
-        id
-      });
-    }, []);
 
   const count = useMemo(() => 
     countActivatedMembers(members)
@@ -107,10 +93,11 @@ function App() {
 
   return (
     <>
-      <Create name={name} email={email} onChange={onChange} onCreate={onCreate} />
-      <List members={members} onRemove={onRemove} onToggle={onToggle} />
-      <span>활성 멤버 수 : {count}</span>
-
+      <MemberDispatch.Provider value={dispatch}>
+        <Create name={name} email={email} onChange={onChange} onCreate={onCreate} />
+        <List members={members} />
+        <span>활성 멤버 수 : {count}</span>
+      </MemberDispatch.Provider>
     </>
   );
 }
