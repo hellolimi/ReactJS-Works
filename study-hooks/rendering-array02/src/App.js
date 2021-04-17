@@ -1,8 +1,7 @@
-import React, { useRef, useMemo, useCallback, useReducer } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import './App.css';
 import List from './components/List';
 import Create from './components/Create';
-import useInputs from './hooks/useInputs';
 
 function countActivatedMembers(members){
   console.log('활성 멤버 수를 세는 중');
@@ -62,16 +61,11 @@ function reducer(state, action){
 }
 
 function App() {
-  const[{name, email}, onChange, reset] = useInputs({
-    name: '',
-    email: ''
-  });
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const nextId = useRef(4);
   const {members} = state;
   
-  const onCreate = useCallback(
+/*   const onCreate = useCallback(
     () => {
       dispatch({
         type: 'CREATE_MEMBER',
@@ -85,7 +79,7 @@ function App() {
       nextId.current++;
     },
     [name, email, reset]
-  );
+  ); */
 
   const count = useMemo(() => 
     countActivatedMembers(members)
@@ -94,7 +88,7 @@ function App() {
   return (
     <>
       <MemberDispatch.Provider value={dispatch}>
-        <Create name={name} email={email} onChange={onChange} onCreate={onCreate} />
+        <Create />
         <List members={members} />
         <span>활성 멤버 수 : {count}</span>
       </MemberDispatch.Provider>

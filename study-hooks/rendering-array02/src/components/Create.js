@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
+import { MemberDispatch } from '../App';
+import useInputs from '../hooks/useInputs';
 
-function Create({name, email, onChange, onCreate}) {
+function Create() {
+    const [{name, email}, onChange, reset] = useInputs({
+        name: '',
+        email: ''
+    });
+    const nextId = useRef(4);
+    const dispatch = useContext(MemberDispatch);
+    const onCreate = () => {
+        dispatch({
+            type: 'CREATE_MEMBER',
+            member: {
+              id: nextId.current,
+              name,
+              email
+            }
+          });
+          reset();
+          nextId.current++;
+    }
     return (
         <div>
             <input 
