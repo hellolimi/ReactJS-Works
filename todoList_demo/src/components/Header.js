@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTodoState } from '../Context';
 
 function Header(){
+    const todos = useTodoState();
     return(
         <div className="header">
             <h2>2021년 4월 7일</h2>
