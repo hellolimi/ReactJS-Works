@@ -1,8 +1,8 @@
-body{ background-color:#ededed; }
+body{ background-color:#FFF1F1; }
 
 .template{ 
-  width: 512px; max-width:100%;
-  height: 768px; max-height:100%;
+  width: 480px; max-width:100%;
+  height: 768px; max-height:100% !important;
 
   position: relative; 
   background: white;
@@ -17,27 +17,43 @@ body{ background-color:#ededed; }
 }
 
 .header{
-padding-top: 48px;
+
+  padding-top: 24px;
   padding-left: 32px;
   padding-right: 32px;
   padding-bottom: 24px;
   border-bottom: 1px solid #e9ecef;
-  h2 {
-    margin: 0;
-    font-size: 36px;
-    color: #343a40;
-  }
-  span{ display:block; }
-  .day {
-    margin-top: 4px;
-    color: #868e96;
-    font-size: 21px;
-  }
+  background-color:#FF9292; border-radius: 16px 16px 0 0;
+  .dateBox{ display:flex; justify-content:flex-start; align-items:center; margin-bottom:16px;
+    h2 {
+        float:left;
+        margin: 0;
+        font-size: 36px;
+        font-weight:600;
+        color: #fff;
+      }
+      span{ display:block; }
+      .day {
+        margin-left:32px;
+        color: #ededed;
+        font-size: 21px;
+      }
+
+    }
   .leftTasks {
-    color: #20c997;
-    font-size: 18px;
+    
+    float:none;
+    padding:0 8px 8px 0;
+    border-bottom:1px solid #fff;
+    color: #ededed;
+    font-size: 20px;
     margin-top: 40px;
-    font-weight: bold;
+    text-align:center;
+    .bold{
+        font-size: 24px;
+        font-weight: 600;
+        color: #fff;
+    }
   }
 }
 
@@ -51,13 +67,14 @@ padding-top: 48px;
 .itemBlock{
     display: flex;
     align-items: center;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom:1px solid #ededed;
     .check{
         width: 32px;
         height: 32px;
-        border-radius: 16px;
-        border: 1px solid #ced4da;
+        border-radius: 50%;
+        border: 1px solid #FF9292;
         font-size: 24px;
         display: flex;
         align-items: center;
@@ -65,16 +82,18 @@ padding-top: 48px;
         margin-right: 20px;
         cursor: pointer;
         &.check-active{
-            border: 1px solid #38d9a9;
-            color: #38d9a9;
+            border: 2px solid #FF9292;
+            color: #fff;
+            background-color:#FF9292;
         }
     }
     .text{
         flex: 1;
         font-size: 21px;
-        color: #495057;
+        color: #333;
         &.text-active{
             color: #ced4da;
+            text-decoration:line-through;
         }
     }
     .remove{
@@ -97,26 +116,25 @@ padding-top: 48px;
 }
 
 .inputButton{
-    background: #38d9a9;
+    background: #FF9292;
     &:hover {
-        background: #63e6be;
+        background: #fca5a5;
     }
     &:active {
-        background: #20c997;
+        background: #ccc;
     }
 
     z-index: 5;
     cursor: pointer;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     display: block;
     align-items: center;
     justify-content: center;
     font-size: 60px;
     position: absolute;
-    left: 50%;
-    bottom: 0px;
-    transform: translate(-50%, 50%);
+    right: 32px;
+    bottom: 32px;
     color: white;
     border-radius: 50%;
     border: none;
@@ -125,17 +143,14 @@ padding-top: 48px;
     align-items: center;
     justify-content: center;
 
-    transition: 0.125s all ease-in;
+    transition: 0.2s all ease-in;
 
     &.active{
-        background: #ff6b6b;
+        background: #ccc;
         &:hover {
             background: #ff8787;
         }
-        &:active {
-            background: #fa5252;
-        }
-        transform: translate(-50%, 50%) rotate(45deg);
+        transform: rotate(45deg);
     }
 }
 
@@ -144,24 +159,53 @@ padding-top: 48px;
     bottom: 0;
     left: 0;
     position: absolute;
+    transform: scale(1,0);
+    transform-origin:bottom center;
+    transition:0.2s; 
+    &.active{
+        transform: scale(1,1);
+    }
     .inputForm{
         background: #f8f9fa;
         padding-left: 32px;
         padding-top: 32px;
         padding-right: 32px;
-        padding-bottom: 72px;
+        padding-bottom: 32px;
 
         border-bottom-left-radius: 16px;
         border-bottom-right-radius: 16px;
         border-top: 1px solid #e9ecef;
         input{
             padding: 12px;
+            margin-bottom:16px;
             border-radius: 4px;
             border: 1px solid #dee2e6;
             width: 100%;
             outline: none;
             font-size: 18px;
             box-sizing: border-box;
+            &::placeholder{ font-size:16px; color:#999; }
         }
+        .submit{ 
+            width:calc(100% - 76px); 
+            height:60px; 
+            border-radius:8px; 
+            border:none; 
+            background-color:#ff8787; 
+            color:#fff; 
+            font-size:20px; 
+            font-weight:600;
+        }
+            
     }
+}
+
+@media screen and (max-width:415px){
+    body{ background-color:transparent; }
+    .template{ 
+        height:100vh;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    .header{ border-radius:0; }
 }

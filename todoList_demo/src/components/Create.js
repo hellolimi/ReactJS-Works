@@ -12,30 +12,34 @@ function Create() {
 
     const onToggle = () => setOpen(!open);
     const onChange = e => setValue(e.target.value);
+    
     const onSubmit = e => {
-        e.preventDefault();
-        dispatch({
-            type: 'CREATE', 
-            list: {
-                id: nextId.current,
-                text: value,
-                done: false
-            }
-        });
-        setValue('');
-        setOpen(false);
-        nextId.current ++;
+        if(value.length===0){
+            alert('Please fill the blank to create a list'); 
+        }else if(value.length > 0){
+            e.preventDefault();
+            dispatch({
+                type: 'CREATE', 
+                list: {
+                    id: nextId.current,
+                    text: value,
+                    done: false
+                }
+            });
+            setValue('');
+            setOpen(false);
+            nextId.current ++;
+        }
     }
 
     return (
         <>
-            {open && (
-                <div className="createBlock">
-                    <form className="inputForm" onSubmit={onSubmit}>
-                        <input autoFocus placeholder="오늘 해야 할 일을 입력한 후 Enter를 누르세요." onChange={onChange} value={value}/>
-                    </form>
-                </div>
-            )}
+            <div className={open?'createBlock active':'createBlock'}>
+                <form className="inputForm" onSubmit={onSubmit}>
+                    <input autoFocus placeholder="Write down your to-do list." onChange={onChange} value={value} />
+                    <button type="submit" className="submit">ADD</button>
+                </form>
+            </div>
             <button className={open?"inputButton active":"inputButton"} onClick={onToggle} open={open}><MdAdd /></button>
         </>
     );

@@ -6,21 +6,23 @@ function Header(){
     const leftTasks = todos.filter(list => !list.done);
     
     const today = new Date();
-    const dateString = today.toLocaleString('ko-KR', {
+    const dateString = today.toLocaleString('en-EN', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
 
     const day = today.toLocaleString('en-EN', {
-        weekday: 'long'
+        weekday: 'short'
     });
 
     return(
         <div className="header">
-            <h2>{dateString}</h2>
-            <span className="day">{day}</span>
-            <span className="leftTasks">오늘 할 일이 {leftTasks.length}개 남았습니다.</span>
+            <div className="dateBox">
+                <h2>{dateString}</h2>
+                <span className="day">{day}</span>
+            </div>
+            <span className="leftTasks"><span className="bold">" {leftTasks.length} "</span>&nbsp; things left to do</span>
         </div>
     );
 }

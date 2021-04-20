@@ -3,17 +3,12 @@ import React, { createContext, useContext, useReducer, useRef } from 'react';
 const initialList = [
     {
         id: 1,
-        text: '리액트 사이트 구현하기',
+        text: 'Study React.js',
         done: false
     },
     {
         id: 2,
-        text: '정원 가꾸기',
-        done: true
-    },
-    {
-        id: 3,
-        text: '아담 머리 잘라주기',
+        text: 'Go grocery shopping',
         done: false
     }
 ];
@@ -37,7 +32,7 @@ const TodoNextIdContext = createContext();
 
 export function TodoProvider({children}){
     const [state, dispatch] = useReducer(listReducer, initialList);
-    const nextId = useRef(4);
+    const nextId = useRef(initialList.length + 1);
     return(
         <TodoStateContext.Provider value={state}>
             <TodoDispatchContext.Provider value={dispatch}>
