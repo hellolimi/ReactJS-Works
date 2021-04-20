@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useRef } from 'react';
 
-initialList = [
+const initialList = [
     {
         id: 1,
         text: '리액트 사이트 구현하기',
@@ -23,7 +23,7 @@ function listReducer(state, action) {
         case 'CREATE':
             return state.concat(action.list);
         case 'TOGGLE':
-            return state.map(list => list.id === id?{...list, done:!done}:list);
+            return state.map(list => list.id === action.id?{...list, done:!list.done}:list);
         case 'REMOVE':
             return state.filter(list => list.id !== action.id);
         default:
@@ -65,7 +65,7 @@ export function useTodoDispatch(){
     return context
 }
 
-export function TodoNextIdContext(){
+export function useNextId(){
     const context = useContext(TodoNextIdContext);
     if(!context){
         throw new Error('Cannot find TodoProvider');

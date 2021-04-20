@@ -1,11 +1,23 @@
 import React from 'react';
+import { useTodoState } from '../Context';
 import Items from './Items';
 
 function List(){
+    const todos = useTodoState();
+
     return(
         <div className="listBlock">
-            <Items text="운동하기" done={ true } />
-            <Items text="맛있는 저녁 준비하기" done={ false } />
+            {todos.map(list => {
+                return(
+                    <Items 
+                        key={list.id}
+                        id={list.id}
+                        text={list.text}
+                        done={list.done} 
+
+                    />
+                )
+            })}
         </div>
     );
 }
