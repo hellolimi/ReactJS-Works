@@ -10,8 +10,9 @@
 - creating custom hooks
 
 # Notable functions
-    - to update today's date everyday
-    - to see how many tasks left to do on the header
-    - to tick the completed task
-    - to create a new list
-    - to delete a list
+
+- to update today's date everyday
+- to see how many tasks left to do on the header
+- to tick the completed task
+- to create a new list
+- to delete a list
